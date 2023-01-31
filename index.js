@@ -21,23 +21,25 @@ for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
 
-	if (data in command) {
+	console.log(`Retrieved ${file} and will join it with ${commandsPath}`);
+
+	if ('data' in command) {
 		client.commands.set(command.data.name, command);
+		console.log(`Successfully inserted ${command.data.name} to Collection`);
 	} else {
 		console.warn('The command at ${filePath} does not have a "data" property');
 	}
 }
 
-client.on('message', async message => {
-	if (message.content.startsWith('/prices')) {
-		let input = message.content.slice(8);
-		console.log(message.content);
-		/*let apiKey = process.env.ISTHEREANYDEALS_TOKEN;
-		let url = 'https://api.isthereanydeal.com/v01/game/prices/?key=${apiKey}&plains=${gameName}'
-		try {
-			let res = await axios.get()
-		} catch(error) {
-			console.error(error);
-		}*/
+client.on(Events.InteractionCreate, async (interaction) => {
+	if (!interaction.isChatInputCommand()) return;
+
+	let command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName}`);
+		return;
 	}
+
+	console.log(`Retrieved ${interaction.commandName}`);
 })
