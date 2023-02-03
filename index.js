@@ -34,12 +34,15 @@ for (const file of commandFiles) {
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
+	console.log(`Retrieved ${interaction.commandName}`);
+
 	let command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName}`);
 		return;
 	}
-
-	console.log(`Retrieved ${interaction.commandName}`);
+	else {
+		await command.execute(interaction);
+	}
 })
