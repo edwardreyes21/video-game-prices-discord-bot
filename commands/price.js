@@ -13,8 +13,6 @@ module.exports = {
     async execute(interaction) {
         let gameName = interaction.options.get('gamename');
 
-        // interaction.reply(`/price is called, gamename: ${gameName.value}`);
-
         try {
             let response = await axios.get(`https://api.isthereanydeal.com/v01/game/prices/?key=${process.env.ISTHEREANYDEALS_TOKEN}&plains=${gameName.value}`);
             let price = response.data;
