@@ -18,13 +18,22 @@ module.exports = {
             let price = response.data;
             let gameData = price.data;
 
-            // console.log(price);
-            // console.log(gameData);
-            // console.log(gameData[gameName.value].list);
+            console.log(price);
+            console.log(gameData);
+            console.log(gameData[gameName.value].urls.game);
+
+            let priceList = gameData[gameName.value].list;
 
             const pricesMessage = new EmbedBuilder()
                 .setColor(0x0099FF)
-                .setTitle(`${gameName.value} Current Prices`);
+                .setTitle(`${gameName.value} Current Prices`)
+                .setURL(gameData[gameName.value].urls.game);
+
+            for (const priceobj of priceList) {
+                pricesMessage.addFields(
+                    { name: `${priceobj.shop.name}`, value: `Current price: ${priceobj.price_new}` }
+                );
+            }
 
             interaction.reply({ embeds: [pricesMessage] });
 
