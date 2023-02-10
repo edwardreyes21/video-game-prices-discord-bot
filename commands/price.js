@@ -12,7 +12,7 @@ module.exports = {
             .setRequired(true)),
     async execute(interaction) {
         let gameObj = interaction.options.get('gamename');
-        
+
         let gameName = gameObj.value;
         gameName = gameName.replace(/\s/g, '').toLowerCase();
 
@@ -26,6 +26,7 @@ module.exports = {
             console.log(gameData[gameName].urls.game);
 
             let priceList = gameData[gameName].list;
+            console.log(priceList);
 
             const pricesMessage = new EmbedBuilder()
                 .setColor(0x0099FF)
@@ -34,7 +35,7 @@ module.exports = {
 
             for (const priceobj of priceList) {
                 pricesMessage.addFields(
-                    { name: `${priceobj.shop.name}`, value: `Current price: ${priceobj.price_new}` }
+                    { name: `${priceobj.price_new} at ${priceobj.shop.name}`, value: `${priceobj.url}` }
                 );
             }
 
