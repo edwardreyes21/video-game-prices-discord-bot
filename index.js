@@ -27,7 +27,7 @@ for (const file of commandFiles) {
 		client.commands.set(command.data.name, command);
 		console.log(`Successfully inserted ${command.data.name} to Collection`);
 	} else {
-		console.warn('The command at ${filePath} does not have a "data" property');
+		console.warn(`The command at ${filePath} does not have a "data" property`);
 	}
 }
 
