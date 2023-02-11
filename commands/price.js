@@ -13,7 +13,7 @@ module.exports = {
     async execute(interaction) {
         let gameObj = interaction.options.get('gamename');
 
-        let userInput = gameObj.value;
+        let userInput = gameObj.value, originalInput = gameObj.value;
         userInput = userInput.replace(/\s/g, '').toLowerCase();
 
         let plainName = "", giveError = false;
@@ -54,7 +54,7 @@ module.exports = {
     
                 const pricesMessage = new EmbedBuilder()
                     .setColor(0x0099FF)
-                    .setTitle(`${plainName} Current Prices`)
+                    .setTitle(`${originalInput} Current Prices`)
                     .setURL(gameData[plainName].urls.game);
     
                 for (const priceobj of priceList) {
