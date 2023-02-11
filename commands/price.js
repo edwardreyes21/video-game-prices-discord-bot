@@ -59,7 +59,7 @@ module.exports = {
     
                 for (const priceobj of priceList) {
                     pricesMessage.addFields(
-                        { name: `${priceobj.price_new} at ${priceobj.shop.name}`, value: `${priceobj.url}` }
+                        { name: `${priceobj.price_new.toFixed(2)} at ${priceobj.shop.name}`, value: `${priceobj.url}` }
                     );
                 }
     
